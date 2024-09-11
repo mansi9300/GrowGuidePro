@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Route, Routes, Link, BrowserRouter } from 'react-router-dom';
 import HomePage from './HomePage';
 import TipCatalogue from './TipCatalogue';
@@ -7,11 +7,13 @@ import Best4u from './Best4u';
 
 
 
+
 function NavBar() {
+    const navRef = useRef()
     return (
         <BrowserRouter>
             <>
-                <div className='Nav'>
+                <div className='Nav' ref={navRef}>
                     <hr />
                     <nav>
                         <Link to="/" className='link'>Homepage</Link>
@@ -24,7 +26,7 @@ function NavBar() {
                 <Routes>
                     <Route path='/' element={<HomePage />} />
                     <Route path='tips' element={<TipCatalogue />} />
-                    <Route path='test' element={<Best4u/>}/>
+                    <Route path='test' element={<Best4u scrollRef={navRef}/>} />
                 </Routes>
             </>
         </BrowserRouter>
