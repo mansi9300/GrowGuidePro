@@ -3,15 +3,15 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { AnimalProvider } from './AnimalCatalogue';
+import { TipProvider } from './TipCatalogue';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <AnimalProvider>
+    <TipProvider>
       <App />
-    </AnimalProvider>
+    </TipProvider>
   </React.StrictMode>
 );
 

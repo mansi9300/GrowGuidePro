@@ -1,12 +1,12 @@
 import React from 'react'
 
-function Animal(props) {
+function Tip(props) {
     return (
-        <div className='animalconta'>
+        <div className='Tipconta'>
             Name: <span style={{ color: "red", fontWeight: "700"}}>{props.name}</span> Habitat: {props.habitat} Diet: {props.diet} Threats: {props.threats} Remaining Members: {props.amount}
             <br />
-            <article className='articleanimal'>
-                <img src={props.src} alt={`a ${props.name}`} id={`${props.name}_img`} className='animal_Img' />
+            <article className='articleTip'>
+                <img src={props.src} alt={`a ${props.name}`} id={`${props.name}_img`} className='Tip_Img' />
                 <p>{props.desc}</p><br></br>
             </article>
             Current Actions: {props.curractions}<br></br>
@@ -14,4 +14,4 @@ function Animal(props) {
         </div>
     )
 }
-export default Animal
+export default Tip
