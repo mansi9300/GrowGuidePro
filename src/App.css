@@ -50,9 +50,8 @@ nav {
 hr {
   margin-top: 1vh;
   margin-bottom: 0.3vh;
-  border: 3px solid black;
-  height: 1px;
-  background-color: rgb(12, 25, 138);
+  height: 0.6svh;
+  background-color: rgba(8, 9, 21, 0.322);
 }
 
 .link {
@@ -61,6 +60,7 @@ hr {
   font-size: 1.4rem;
   color: rgb(0, 0, 0);
   font-weight: bold;
+  font-style: italic;
 }
 
 .link:hover {

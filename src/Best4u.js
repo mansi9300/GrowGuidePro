@@ -28,7 +28,7 @@ function Best4u({scrollRef}) {
         "Peanuts",
         "Oats",
         "Lettuce",
-        "Sorghum"
+        "Sorghum",
     ];
     const cropInstances = crops.map(crop => new CropsClass());
     const results = [];
