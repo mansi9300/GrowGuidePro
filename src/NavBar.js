@@ -21,7 +21,6 @@ function NavBar() {
                     </nav>
                     <hr></hr>
                 </div>
-                {/*Didnt had time for backend sorry for this mess and didnt used context api cuz there is no need and no need for complication*/}
                 <Routes>
                     <Route path='/' element={<HomePage />} />
                     <Route path='tips' element={<TipCatalogue />} />

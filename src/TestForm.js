@@ -32,66 +32,6 @@ function TestForm(props) {
                 <input type="radio" id="q3d" name="water" value="D" />
                 <label htmlFor="q3d">D. No, I do not have sufficient water resources.</label><br /><br />
 
-                <label htmlFor="q4">4. Can this crop tolerate frost or extreme cold temperatures?</label><br />
-                <input type="radio" id="q4a" name="cold" value="A" required />
-                <label htmlFor="q4a">A. Yes, it is frost-tolerant.</label><br />
-                <input type="radio" id="q4b" name="cold" value="B" />
-                <label htmlFor="q4b">B. It can handle mild frost with protection.</label><br />
-                <input type="radio" id="q4c" name="cold" value="C" />
-                <label htmlFor="q4c">C. No, frost will damage the crop.</label><br />
-                <input type="radio" id="q4d" name="cold" value="D" />
-                <label htmlFor="q4d">D. Frost is not an issue in my region.</label><br /><br />
-
-                <label htmlFor="q5">5. Does the length of your local growing season align with the time needed for this crop to mature?</label><br />
-                <input type="radio" id="q5a" name="season" value="A" required />
-                <label htmlFor="q5a">A. Yes, the growing season is long enough.</label><br />
-                <input type="radio" id="q5b" name="season" value="B" />
-                <label htmlFor="q5b">B. The season is short, but manageable.</label><br />
-                <input type="radio" id="q5c" name="season" value="C" />
-                <label htmlFor="q5c">C. The growing season is not long enough.</label><br /><br />
-
-                <label htmlFor="q6">6. Is there a local or export market for this crop?</label><br />
-                <input type="radio" id="q6a" name="market" value="A" required />
-                <label htmlFor="q6a">A. Yes, there is a strong demand for this crop.</label><br />
-                <input type="radio" id="q6b" name="market" value="B" />
-                <label htmlFor="q6b">B. There is some demand locally, but limited export options.</label><br />
-                <input type="radio" id="q6c" name="market" value="C" />
-                <label htmlFor="q6c">C. No, market demand is low for this crop.</label><br /><br />
-
-
-                <label htmlFor="q7">7. Does this crop have resistance to common pests and diseases in your region?</label><br />
-                <input type="radio" id="q7a" name="pest" value="A" required />
-                <label htmlFor="q7a">A. Yes, it is naturally resistant.</label><br />
-                <input type="radio" id="q7b" name="pest" value="B" />
-                <label htmlFor="q7b">B. It is moderately resistant with some pesticide use.</label><br />
-                <input type="radio" id="q7c" name="pest" value="C" />
-                <label htmlFor="q7c">C. No, it is prone to pests and diseases.</label><br /><br />
-
-
-                <label htmlFor="q8">8. Does this crop require special planting, maintenance, or harvesting techniques?</label><br />
-                <input type="radio" id="q8a" name="special" value="A" required />
-                <label htmlFor="q8a">A. No, it can be planted and harvested with standard methods.</label><br />
-                <input type="radio" id="q8b" name="special" value="B" />
-                <label htmlFor="q8b">B. It requires some specialized techniques.</label><br />
-                <input type="radio" id="q8c" name="special" value="C" />
-                <label htmlFor="q8c">C. Yes, it needs significant labor and specialized equipment.</label><br /><br />
-
-                <label htmlFor="q9">9. Is the crop tolerant of varying soil moisture conditions?</label><br />
-                <input type="radio" id="q9a" name="moist" value="A" required />
-                <label htmlFor="q9a">A. Yes, it adapts well to different moisture levels.</label><br />
-                <input type="radio" id="q9b" name="moist" value="B" />
-                <label htmlFor="q9b">B. It can tolerate some variation but needs consistent moisture.</label><br />
-                <input type="radio" id="q9c" name="moist" value="C" />
-                <label htmlFor="q9c">C. No, it requires strict moisture control.</label><br /><br />
-
-                <label htmlFor="q10">10. Do you have the necessary equipment and resources to grow this crop successfully?</label><br />
-                <input type="radio" id="q10a" name="equipment" value="A" required />
-                <label htmlFor="q10a">A. Yes, I have everything needed.</label><br />
-                <input type="radio" id="q10b" name="equipment" value="B" />
-                <label htmlFor="q10b">B. I have most resources, but may need to invest in some equipment.</label><br />
-                <input type="radio" id="q10c" name="equipment" value="C" />
-                <label htmlFor="q10c">C. No, I will need significant investments in equipment and resources.</label><br /><br />
-
                 <button type="submit" onClick={props.onClick}>Submit</button>
             </form>
         </>
