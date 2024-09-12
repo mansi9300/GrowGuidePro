@@ -19,7 +19,24 @@
   height: 35vh;
 }
 
-
+#testLink:hover::after {
+  content: "Click To Find The Best Crops For You";
+  position: absolute;
+  font-size: 1rem;
+  font-style: italic;
+  bottom: -32px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(70, 70, 70, 0.75);
+  color: white;
+  padding: 5px;
+  padding-top: 3px;
+  border-radius: 4px;
+  white-space: nowrap;
+  z-index: 1;
+  opacity: 1;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
 .brief {
   position: relative;
   top: 5vh;
@@ -256,11 +273,13 @@ section {
     align-items: center;
   }
 }
-#no-tip{
+
+#no-tip {
   position: absolute;
   justify-self: center;
   font-size: 1.5rem;
 }
-#banner{ 
+
+#banner {
   height: 65svh;
 }

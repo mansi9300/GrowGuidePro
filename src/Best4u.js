@@ -78,6 +78,10 @@ function Best4u({ scrollRef }) {
     }
     return (
         <>
+        <details>
+            <summary>Arda</summary>
+            awdwaawdadwadaw
+        </details>
             {isFinished ? (
                 <>
                     <TestResults />
