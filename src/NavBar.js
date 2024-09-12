@@ -13,7 +13,7 @@ function NavBar() {
     return (
         <BrowserRouter>
             <>
-                <div className='Nav' ref={navRef}>  
+                <div className='Nav' ref={navRef}>
                     <nav>
                         <Link to="/" className='link'>Homepage</Link>
                         <Link to="tips" className='link'>Tips</Link>
@@ -24,7 +24,7 @@ function NavBar() {
                 <Routes>
                     <Route path='/' element={<HomePage />} />
                     <Route path='tips' element={<TipCatalogue />} />
-                    <Route path='test' element={<Best4u scrollRef={navRef}/>} />
+                    <Route path='test' element={<Best4u scrollRef={navRef} />} />
                 </Routes>
             </>
         </BrowserRouter>

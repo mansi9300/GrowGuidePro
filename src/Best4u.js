@@ -1,5 +1,5 @@
 import TestForm from './TestForm';
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import Crop from './Crop';
 function Best4u({ scrollRef }) {
     const [isFinished, setIsFinished] = useState(false);
@@ -45,7 +45,7 @@ function Best4u({ scrollRef }) {
 
         if (form.checkValidity()) {
             getSelectedValues();
-            console.log(result);
+
             form.reset();
             setIsFinished(true);
             scrollRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' })
@@ -66,6 +66,7 @@ function Best4u({ scrollRef }) {
         }
 
         setResult(results);
+        console.log(result);
     }
     const TestResults = () => {
         return (
@@ -78,10 +79,10 @@ function Best4u({ scrollRef }) {
     }
     return (
         <>
-        <details>
-            <summary>Arda</summary>
-            awdwaawdadwadaw
-        </details>
+            <details>
+                <summary>Arda</summary>
+                awdwaawdadwadaw
+            </details>
             {isFinished ? (
                 <>
                     <TestResults />

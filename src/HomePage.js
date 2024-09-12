@@ -4,7 +4,7 @@ import Tip from './Tip';
 function HomePage() {
     const items = useContext(TipContext).map((component) => ({
         id: crypto.randomUUID(),
-        component: React.cloneElement(component, { home: true})
+        component: React.cloneElement(component, { home: true })
     }));
     let speed = 300000
     return (
@@ -15,7 +15,7 @@ function HomePage() {
                 <div className="wrapper">
                     <section style={{ "--speed": `${speed}ms` }}>
                         {items.map(({ id, component }) => (
-                            <div  key={id} className='moving-container'>
+                            <div key={id} className='moving-container'>
                                 {component}
                             </div>
                         ))}
