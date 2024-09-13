@@ -1,77 +1,33 @@
-import React, { useState, createContext } from "react";
+import React, { useState } from "react";
 import TipLink from "./TipLink";
+import tip1img from "./Images/tip_1.png"
+import tip2img from "./Images/tip_2.png"
+import tip3img from "./Images/tip_3.png"
+import tip4img from "./Images/tip_4.png"
+import tip5img from "./Images/tip_5.png"
+import tip6img from "./Images/tip_6.png"
+import tip7img from "./Images/tip_7.png"
+import tip8img from "./Images/tip_8.png"
+import tip9img from "./Images/tip_9.png"
+import tip10img from "./Images/tip_10.png"
 
-const Tips = [
-
+const tips = [
+    <TipLink name="Composting and Organic Fertilizers" src={tip1img}></TipLink>,
+    <TipLink name="Renewable Energy on Farms" src={tip2img}></TipLink>,
+    <TipLink name="Water Conservation on Farms" src={tip3img}></TipLink>,
+    <TipLink name="Agroforestry on Farms" src={tip4img}></TipLink>,
+    <TipLink name="Crop Rotation and Companion Planting" src={tip5img}></TipLink>,
+    <TipLink name="Natural Pest Control on Farms" src={tip6img}></TipLink>,
+    <TipLink name="Practicing Organic Farming" src={tip7img}></TipLink>,
+    <TipLink name="Reduced Tillage Farming" src={tip8img}></TipLink>,
+    <TipLink name="Biodiversity Enhancement" src={tip9img}></TipLink>,
+    <TipLink name="Smart Farming Technology" src={tip10img}></TipLink>,
 ];
-export const TipContext = createContext();
-export const TipProvider = ({ children }) => {
-    const [array] = useState(Tips);
 
-    return (
-        <TipContext.Provider value={array}>
-            {children}
-        </TipContext.Provider>
-    );
-};
 function TipCatalogue() {
-    const [searchTerm, setSearchTerm] = useState('');
-    const [sortOrder, setSortOrder] = useState('asc');
-
-    const getTipData = (TipLink) => {
-        return {
-            name: TipLink.props.name,
-            amount: TipLink.props.amount,
-            src: TipLink.props.src
-        };
-    };
-
-    const filteredTip = Tips
-        .map(getTipData)
-        .filter(tip =>
-            tip.name.toLowerCase().includes(searchTerm.toLowerCase())
-        )
-        .sort((a, b) => {
-            if (sortOrder === 'asc') {
-                return a.amount - b.amount;
-            } else {
-                return b.amount - a.amount;
-            }
-        });
-
-    const sortedTips = filteredTip.map((Tip, index) => (
-        <TipLink key={index} name={Tip.name} src={Tip.src} amount={Tip.amount} />
-    ));
-    const NoTip = () => {
-        return (
-            <>
-                <p id="no-Tip">There is no such Tip</p>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-            </>
-        );
-    }
-
     return (
         <>
-            <section className="search-section">
-                <input
-                    name="search"
-                    type="text"
-                    placeholder="Search Tips..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    className="search-input"
-                />
-                <button className="sort-button" onClick={() => setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}>
-                    Sort by Amount ({sortOrder === 'asc' ? 'Ascending' : 'Descending'})
-                </button>
-            </section>
-            <br />
-            <div id="Tipcontainer">{sortedTips.length > 0 ? sortedTips : <NoTip></NoTip>}</div>
+            <div id="Tipcontainer">{tips}</div>
         </>
     );
 }

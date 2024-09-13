@@ -2,18 +2,21 @@ import React from "react";
 import { Link } from 'react-router-dom';
 
 function TipLink(props) {
-    if (props.home === true) {
+    if(props.home === true)
+    {
         return (
-            <Link to={`Tips/${props.name.toLowerCase().replace("'", " ")}`} className="homelinklink">
-                <img src={props.src} alt={`a ${props.name}`} id={`${props.name}_Tip`} className="moving-Tip" />
-            </Link>)
+            <Link to={props.name.toLowerCase().replace(/ /g, "-")} className="tip-link-link-home">
+                <p className="tip-p-home">{props.name}</p>
+                <img src={props.src} alt={`a ${props.name}`} id={`${props.name}_Tip`} className="tipImg-home" />
+                <br />
+            </Link>
+        )
     }
     return (
-        <Link to={props.name.toLowerCase().replace("'", "")} className="Tip-link-link">
-            <p>{props.name.replace(/-/g, " ")}</p>
-            <img src={props.src} alt={`a ${props.name}`} id={`${props.name}_Tip`} className="TipImg" />
+        <Link to={props.name.toLowerCase().replace(/ /g, "-")} className="tip-link-link">
+            <p className="tip-p">{props.name}</p>
+            <img src={props.src} alt={`a ${props.name}`} id={`${props.name}_Tip`} className="tipImg" />
             <br />
-            <p>Amount left: {props.amount}</p><br />
         </Link>
     )
 }

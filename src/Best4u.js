@@ -34,8 +34,19 @@ function Best4u({ scrollRef }) {
         "Oats",
         "Lettuce",
         "Sorghum",
-    ];
-
+        "Sunflowers",
+        "Carrots",
+        "Avocados",
+        "Chilies",
+        "Pumpkins",
+        "Garlic",
+        "Radishes",
+        "Pineapples",
+        "Zucchini",
+        "Squash",
+        "Apples",
+        "Pears",
+    ];  
     const cropInstances = crops.map(crop => new CropsClass(0, false, crop));
     const [bestCrops, setBestCrops] = useState([cropInstances[1], cropInstances[2], cropInstances[0]]);
     const onClickHandler = (event) => {
@@ -79,10 +90,6 @@ function Best4u({ scrollRef }) {
     }
     return (
         <>
-            <details>
-                <summary>Arda</summary>
-                awdwaawdadwadaw
-            </details>
             {isFinished ? (
                 <>
                     <TestResults />
