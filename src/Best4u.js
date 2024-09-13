@@ -46,9 +46,12 @@ function Best4u({ scrollRef }) {
         "Squash",
         "Apples",
         "Pears",
-    ];  
+    ];
     const cropInstances = crops.map(crop => new CropsClass(0, false, crop));
     const [bestCrops, setBestCrops] = useState([cropInstances[1], cropInstances[2], cropInstances[0]]);
+    cropInstances[0].point = 5;
+    cropInstances[1].point = 4;
+    cropInstances[2].point = 3;
     const onClickHandler = (event) => {
         event.preventDefault();
         console.log(isFinished);
@@ -66,7 +69,19 @@ function Best4u({ scrollRef }) {
             scrollRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
     };
-
+    const getCropData = (cropInstance) => {
+        return {
+            name: cropInstance.name,
+            point: cropInstance.point,
+            isdead: cropInstance.isdead
+        };
+    };
+    const listOfCrops = bestCrops.map(getCropData).sort((a, b) => {
+        return b.point - a  .point;
+    })
+    const sortedListOfCrops = listOfCrops.map((crop, index) => (
+        <Crop key={index} name={crop.name}  point={crop.point} />
+    ));
     function getSelectedValues() {
         const form = document.getElementById('testForm');
         const formData = new FormData(form);
@@ -81,11 +96,11 @@ function Best4u({ scrollRef }) {
     }
     const TestResults = () => {
         return (
-            <div className='test-container'>
-                {bestCrops.map((crop) => (
-                    <Crop key={crop.name} img={crop.name} name={crop.name}></Crop>
-                ))}
-            </div>
+            <>
+                <div className='normal-list-container'>
+                    {sortedListOfCrops}
+                </div>
+            </>
         )
     }
     return (

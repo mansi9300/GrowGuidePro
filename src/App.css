@@ -1,3 +1,4 @@
+/*Sorry for this mess i could have used diffrent files*/
 * {
   margin: 0;
   padding: 0;
@@ -69,8 +70,9 @@
   color: white;
   font-size: 1.5rem;
   font-weight: 700;
-  background-color: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(4px);
+  background-color: rgba(78, 75, 75, 0.5);
+  border-radius: 7%;
+  backdrop-filter: blur(2px);
   padding: 0.5rem;
   overflow: auto;
 }
@@ -80,7 +82,8 @@
   display: inline-block;
   text-decoration: none;
 }
-#homepageImg{
+
+#homepageImg {
   position: relative;
   float: right;
   width: 40vw;
@@ -92,15 +95,17 @@
   margin-right: 2vw;
   margin-top: 2vh;
 }
-#homepageArticle{
+
+#homepageArticle {
   position: relative;
   left: 5vw;
   width: 90vw;
   margin-top: 7vh;
   border: 2px black;
-  border-style: double; 
+  border-style: double;
 }
-#homepageArticle p{
+
+#homepageArticle p {
   font-size: 1.2rem;
   font-style: italic;
   margin-left: 2vw;
@@ -108,6 +113,7 @@
   margin-top: 2vh;
   margin-bottom: 2vh;
 }
+
 .brief {
   position: relative;
   left: 10vw;
@@ -274,13 +280,6 @@ hr {
     gap: 5vw;
   }
 
-  hr {
-    margin-top: 1vh;
-    margin-bottom: 0.3vh;
-    border: none;
-    height: 5px;
-    background-color: black;
-  }
 
   .link {
     font-size: 1rem;
@@ -293,28 +292,129 @@ hr {
     height: 30vh;
   }
 
-  .moving-tip {
-    height: 20vh;
-    width: 30vw;
-  }
-
-
-  .inner {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-    height: 34vh;
-    justify-content: center;
-    align-items: center;
-  }
 }
 
-#no-tip {
-  position: absolute;
-  justify-self: center;
-  font-size: 1.5rem;
-}
 
 #banner {
   height: 65svh;
+}
+
+
+
+.form-container {
+  position: relative;
+  margin-top: 10vh;
+  left: 25vw;
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  width: 50vw;
+  animation: fadeIn 1s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.form-container label {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.answers {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.answers input[type="radio"] {
+  margin-right: 10px;
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+.answers label {
+  font-size: 16px;
+  font-weight: 300;
+  color: #666;
+  padding: 10px;
+  width: 100%;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.answers label:hover {
+  background-color: #f0f0f0;
+  border-radius: 8px;
+}
+
+.answers input:checked+label {
+  background-color: #e3fceb;
+  border-radius: 8px;
+  border-left: 5px solid #4caf50;
+  padding-left: 15px;
+}
+
+.submit-btn {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  font-size: 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.submit-btn:hover {
+  background-color: #43a047;
+}
+
+@media (max-width: 768px) {
+  .form-container {
+    max-width: 90%;
+    padding: 20px;
+  }
+
+  .answers label {
+    font-size: 14px;
+  }
+
+  .submit-btn {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-container {
+    max-width: 95%;
+    padding: 15px;
+  }
+
+  .answers label {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .submit-btn {
+    font-size: 14px;
+    padding: 10px 20px;
+  }
 }
