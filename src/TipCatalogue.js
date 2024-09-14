@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import TipLink from "./TipLink";
 import tip1img from "./Images/tip_1.png"
 import tip2img from "./Images/tip_2.png"
@@ -20,7 +20,7 @@ const tips = [
     <TipLink key={6} name="Natural Pest Control on Farms" src={tip6img}></TipLink>,
     <TipLink key={7} name="Practicing Organic Farming" src={tip7img}></TipLink>,
     <TipLink key={8} name="Reduced Tillage Farming" src={tip8img}></TipLink>,
-    <TipLink key={9}name="Biodiversity Enhancement" src={tip9img}></TipLink>,
+    <TipLink key={9} name="Biodiversity Enhancement" src={tip9img}></TipLink>,
     <TipLink key={10} name="Smart Farming Technology" src={tip10img}></TipLink>,
 ];
 

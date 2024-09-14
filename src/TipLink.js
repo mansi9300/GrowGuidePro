@@ -5,7 +5,7 @@ function TipLink(props) {
     if(props.home === true)
     {
         return (
-            <Link to={props.name.toLowerCase().replace(/ /g, "-")} className="tip-link-link-home">
+            <Link to={`tips/${props.name.toLowerCase().replace(/ /g, "-")}`} className="tip-link-link-home">
                 <p className="tip-p-home">{props.name}</p>
                 <img src={props.src} alt={`a ${props.name}`} id={`${props.name}_Tip`} className="tipImg-home" />
                 <br />
