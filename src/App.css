@@ -88,8 +88,7 @@
   position: relative;
   float: right;
   width: 40vw;
-  height: 75vh;
-  object-fit: fill;
+  height: 65svh;
   border: 2px solid black;
   border-radius: 10%;
   margin-left: 1vw;
