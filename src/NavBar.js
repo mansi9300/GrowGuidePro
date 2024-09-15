@@ -1,9 +1,11 @@
-import React, { useRef } from 'react';
-import { Route, Routes, Link, BrowserRouter } from 'react-router-dom';
+import React, { forwardRef } from 'react';
+import { Route, Routes, Link, useLocation } from 'react-router-dom';
 import HomePage from './HomePage';
+import CropsCatalogue from './CropsCatalogue'
 import TipCatalogue from './TipCatalogue';
 import Tip from './Tip';
 import Best4u from './Best4u';
+import Crop from './Crop';
 import tip1img from "./Images/tip_1.png"
 import tip2img from "./Images/tip_2.png"
 import tip3img from "./Images/tip_3.png"
@@ -14,6 +16,38 @@ import tip7img from "./Images/tip_7.png"
 import tip8img from "./Images/tip_8.png"
 import tip9img from "./Images/tip_9.png"
 import tip10img from "./Images/tip_10.png"
+import rice from './Images/cropIndex_1.png'
+import wheat from './Images/cropIndex_2.png'
+import corn from './Images/cropIndex_3.png'
+import soybeans from './Images/cropIndex_4.png'
+import barley from './Images/cropIndex_5.png'
+import sugarcane from './Images/cropIndex_6.png'
+import potatoes from './Images/cropIndex_7.png'
+import cassava from './Images/cropIndex_8.png'
+import tomatoes from './Images/cropIndex_9.png'
+import bananas from './Images/cropIndex_10.png'
+import cotton from './Images/cropIndex_11.png'
+import coffee from './Images/cropIndex_12.png'
+import cocoa from './Images/cropIndex_13.png'
+import oranges from './Images/cropIndex_14.png'
+import grapes from './Images/cropIndex_15.png'
+import onions from './Images/cropIndex_16.png'
+import peanuts from './Images/cropIndex_17.png'
+import oats from './Images/cropIndex_18.png'
+import lettuce from './Images/cropIndex_19.png'
+import sorghum from './Images/cropIndex_20.png'
+import sunflowers from './Images/cropIndex_21.png'
+import carrots from './Images/cropIndex_22.png'
+import avocados from './Images/cropIndex_23.png'
+import chilies from './Images/cropIndex_24.png'
+import pumpkins from './Images/cropIndex_25.png'
+import garlic from './Images/cropIndex_26.png'
+import radishes from './Images/cropIndex_27.png'
+import pineapples from './Images/cropIndex_28.png'
+import zucchini from './Images/cropIndex_29.png'
+import squash from './Images/cropIndex_30.png'
+import apples from './Images/cropIndex_31.png'
+import pears from './Images/cropIndex_32.png'
 
 
 const tip_1List = {
@@ -69,7 +103,7 @@ const tip_8List = {
     "Minimize Soil Disturbance": "In reduced tillage farming, aim to disturb the soil as little as possible. Use tools like strip-tillers or specialized no-till drills to plant seeds directly into the soil without plowing or turning the earth. This helps maintain soil structure and organic matter.",
     "Grow Cover Crops": "Cover crops, such as clover, rye, or vetch, protect the soil from erosion and improve fertility during off-seasons. They add organic matter to the soil and reduce the need for tilling by suppressing weeds naturally.",
     "Rotate Crops and Use Mulch": "Rotate crops annually and use organic mulch to suppress weeds and retain soil moisture. Mulch and crop residue left on the surface of the field break down over time, adding nutrients to the soil without the need for tillage.",
-    "Monitor Soil Health": "Regularly test your soil to track improvements in structure, fertility, and moisture retention. Reduced tillage encourages beneficial soil organisms, such as earthworms and fungi, which improve soil health. Adjust your practices based on the results to continue building healthy soil.",
+    "Monitor Soil Health": "Regularly what-to-plant your soil to track improvements in structure, fertility, and moisture retention. Reduced tillage encourages beneficial soil organisms, such as earthworms and fungi, which improve soil health. Adjust your practices based on the results to continue building healthy soil.",
     "Manage Equipment": "Ensure your equipment is adapted for reduced tillage. Specialized no-till planters and strip-tillers can seed directly into crop residue, minimizing soil disturbance. Properly maintained equipment ensures the success of your reduced-tillage farming practices."
 }
 const tip_9List = {
@@ -99,37 +133,109 @@ const descriptions = [
     "Enhancing biodiversity on farms is essential for creating a balanced and resilient ecosystem that supports both crop production and environmental health. One of the simplest ways to boost biodiversity is by planting pollinator-friendly plants around crop fields. These plants attract beneficial pollinators like bees and butterflies, which are vital for crop pollination and yield. By choosing a diverse range of plants that bloom at different times, farmers can ensure that pollinators have a steady food supply throughout the year. In addition to flowers, farmers can diversify their crops, rotating different varieties to improve soil health, disrupt pest cycles, and reduce the risk of crop failure. Designating areas of the farm as wildlife habitats, such as hedgerows or ponds, provides shelter and food for birds, insects, and small mammals. These habitats encourage the presence of beneficial organisms that control pests naturally, reducing the need for chemical inputs. Integrated Pest Management (IPM) strategies further promote biodiversity by combining natural pest control methods with crop rotation and careful monitoring. As biodiversity increases, the farm becomes more self-sustaining, with fewer pests, healthier soil, and improved crop resilience. By enhancing biodiversity, farmers create a thriving ecosystem that benefits both agriculture and the environment.",
     "Smart farming technology is revolutionizing agriculture by enabling farmers to optimize productivity while conserving resources. Soil moisture sensors provide real-time data on soil moisture levels, ensuring that irrigation is applied only when needed, reducing water waste and preventing over-irrigation. Meanwhile, GPS-guided tractors improve the accuracy of planting, tilling, and harvesting operations, minimizing overlaps and saving fuel. These tools allow farmers to manage their fields with precision, enhancing both efficiency and sustainability. Additionally, drones equipped with infrared cameras offer a bird’s-eye view of crop health, enabling farmers to detect issues like nutrient deficiencies or water stress early on. This helps farmers take targeted action, reducing the risk of crop loss. The integration of data through farm management software allows for better decision-making, enabling farmers to plan planting schedules, track resource usage, and monitor crop growth in real time. By embracing precision agriculture, farmers can apply inputs like fertilizers and pesticides more efficiently, minimizing waste and environmental impact. Smart farming technology empowers farmers to make informed decisions, reduce costs, and increase yields, all while contributing to a more sustainable agricultural system."
 ]
-function NavBar() {
-    const navRef = useRef()
+
+
+const NavBar = forwardRef((props, ref) => {
+    const location = useLocation();
+
+    const isActive = (path) => location.pathname === path;
+
     return (
-        <BrowserRouter>
-            <>
-                <div className='Nav' ref={navRef}>
-                    <nav>
-                        <Link to="/" className='link'>Homepage</Link>
-                        <Link to="tips" className='link'>Tips</Link>
-                        <Link to="test" className='link' id='testLink'>Test</Link>
-                    </nav>
-                    <hr></hr>
-                </div>
-                <Routes>
-                    <Route path='/' element={<HomePage />} />
-                    <Route path='tips' element={<TipCatalogue />} />
-                    <Route path='test' element={<Best4u scrollRef={navRef} />} />
-                    <Route path='tips/composting-and-organic-fertilizers' element={<Tip steps={tip_1List} desc={descriptions[0]} img={tip1img} name="Composting and Organic Fertilizers" />}></Route>
-                    <Route path='tips/renewable-energy-on-farms' element={<Tip steps={tip_2List} desc={descriptions[1]} name="Renewable Energy on Farms" img={tip2img} />}></Route>
-                    <Route path='tips/water-conservation-on-farms' element={<Tip steps={tip_3List} desc={descriptions[2]} name="Water Conservation on Farms" img={tip3img} />}></Route>
-                    <Route path='tips/agroforestry-on-farms' element={<Tip steps={tip_4List} desc={descriptions[3]} name="Agroforestry on Farms" img={tip4img} />}  ></Route>
-                    <Route path='tips/crop-rotation-and-companion-planting' element={<Tip steps={tip_5List} desc={descriptions[4]} name="Crop Rotation and Companion Planting" img={tip5img} />}></Route>
-                    <Route path='tips/natural-pest-control-on-farms' element={<Tip steps={tip_6List} desc={descriptions[5]} name="Natural Pest Control on Farms" img={tip6img} />}></Route>
-                    <Route path='tips/practicing-organic-farming' element={<Tip steps={tip_7List} desc={descriptions[6]} name="Practicing Organic Farming" img={tip7img} />}></Route>
-                    <Route path='tips/reduced-tillage-farming' element={<Tip steps={tip_8List} desc={descriptions[7]} name="Reduced Tillage Farming" img={tip8img} />}></Route>
-                    <Route path='tips/biodiversity-enhancement' element={<Tip steps={tip_9List} desc={descriptions[8]} name="Biodiversity Enhancement" img={tip9img} />}></Route>
-                    <Route path='tips/smart-farming-technology' element={<Tip steps={tip_10List} desc={descriptions[9]} name="Smart Farming Technology" img={tip10img} />}></Route>
-                </Routes>
-            </>
-        </BrowserRouter>
+        <>
+            <div className='Nav' ref={ref}>
+                <nav>
+                    <Link to="/" className='link' style={{ color: isActive('/') ? 'black' : 'grey', fontWeight: isActive('/') ? 'bold' : 'normal' }}>Homepage</Link>
+                    <Link to="/tips" className='link' style={{ color: isActive('/tips') ? 'black' : 'grey', fontWeight: isActive('/tips') ? 'bold' : 'normal' }}>Tips</Link>
+                    <Link to="/what-to-plant" className='link' id='testLink' style={{ color: isActive('/what-to-plant') ? 'black' : 'grey', fontWeight: isActive('/what-to-plant') ? 'bold' : 'normal' }}>What To Plant</Link>
+                    <Link to="/crops" className='link' style={{ color: isActive('/crops') ? 'black' : 'grey', fontWeight: isActive('/crops') ? 'bold' : 'normal' }}>Crops</Link>
+                </nav>
+                <hr />
+            </div>
+
+
+            <Routes>
+                <Route path='/' element={<HomePage />} />
+                <Route path='/tips' element={<TipCatalogue />} />
+                <Route path='/crops' element={<CropsCatalogue />} />
+                <Route path='/what-to-plant' element={<Best4u scrollRef={ref} />} />
+                <Route path='/tips/composting-and-organic-fertilizers' element={<Tip steps={tip_1List} desc={descriptions[0]} img={tip1img} name="Composting and Organic Fertilizers" />} />
+                <Route path='/tips/renewable-energy-on-farms' element={<Tip steps={tip_2List} desc={descriptions[1]} name="Renewable Energy on Farms" img={tip2img} />} />
+                <Route path='/tips/water-conservation-on-farms' element={<Tip steps={tip_3List} desc={descriptions[2]} name="Water Conservation on Farms" img={tip3img} />} />
+                <Route path='/tips/agroforestry-on-farms' element={<Tip steps={tip_4List} desc={descriptions[3]} name="Agroforestry on Farms" img={tip4img} />} />
+                <Route path='/tips/crop-rotation-and-companion-planting' element={<Tip steps={tip_5List} desc={descriptions[4]} name="Crop Rotation and Companion Planting" img={tip5img} />} />
+                <Route path='/tips/natural-pest-control-on-farms' element={<Tip steps={tip_6List} desc={descriptions[5]} name="Natural Pest Control on Farms" img={tip6img} />} />
+                <Route path='/tips/practicing-organic-farming' element={<Tip steps={tip_7List} desc={descriptions[6]} name="Practicing Organic Farming" img={tip7img} />} />
+                <Route path='/tips/reduced-tillage-farming' element={<Tip steps={tip_8List} desc={descriptions[7]} name="Reduced Tillage Farming" img={tip8img} />} />
+                <Route path='/tips/biodiversity-enhancement' element={<Tip steps={tip_9List} desc={descriptions[8]} name="Biodiversity Enhancement" img={tip9img} />} />
+                <Route path='/tips/smart-farming-technology' element={<Tip steps={tip_10List} desc={descriptions[9]} name="Smart Farming Technology" img={tip10img} />} />
+                
+                <Route path='/crops/soybeans' element={<Crop img={soybeans} name="Soybean" desc="Soybeans are a species of legume widely grown for its edible bean, which has numerous uses, including being a major source of vegetable oil and protein." scientificName="Glycine max" season="Late spring to early summer (May-June)" waterRequirement="1 inch of water per week" soilType="Well-drained loamy soil with a pH of 6.0 to 6.8" harvestTime="Late summer to early fall (90-120 days after planting)" fertilization="Soybeans require nitrogen-fixing bacteria in the soil." pestControl="Soybeans may be affected by pests such as aphids, so regular monitoring is necessary." market="Soybeans are highly sought after for their protein content and use in biofuels." />} />
+
+                <Route path='/crops/corn' element={<Crop img={corn} name="Corn" desc="Corn is a large grain plant first domesticated by indigenous peoples in southern Mexico about 10,000 years ago." scientificName="Zea mays" season="Spring to early summer (April-June)" waterRequirement="1 to 1.5 inches of water per week" soilType="Well-drained, fertile soil with a pH of 6.0 to 6.5" harvestTime="Late summer to early fall (80-100 days after planting)" fertilization="Corn requires high nitrogen levels, especially during the early growth stages." pestControl="Corn can be affected by pests like corn borers and earworms, so monitoring and pest control methods are necessary." market="Corn is a staple crop used for human consumption, livestock feed, and biofuels." />} />
+
+                <Route path='/crops/wheat' element={<Crop img={wheat} name="Wheat" desc="Wheat is a cereal grain originally from the Levant region but now grown worldwide." scientificName="Triticum spp." season="Fall or early spring" waterRequirement="12-15 inches of water during the growing season" soilType="Loamy soil with a pH of 6.0 to 7.0" harvestTime="Summer (120-150 days after planting)" fertilization="Wheat requires nitrogen, phosphorus, and potassium fertilizers depending on soil conditions." pestControl="Common pests include aphids and armyworms; integrated pest management is recommended." market="Wheat is one of the most important staple crops worldwide, used for food and industrial products." />} />
+
+                <Route path='/crops/rice' element={<Crop img={rice} name="Rice" desc="Rice is a staple food for more than half of the world’s population." scientificName="Oryza sativa" season="Late spring to summer (May-August)" waterRequirement="Requires a flooded field (paddy) or alternate wetting and drying system" soilType="Clayey or silty soil that retains water" harvestTime="Early fall (100-180 days after planting)" fertilization="Rice requires nitrogen and phosphorus-based fertilizers." pestControl="Rice can be affected by pests like the rice water weevil; integrated pest management is advised." market="Rice is a staple crop worldwide, especially in Asian countries." />} />
+
+                <Route path='/crops/barley' element={<Crop img={barley} name="Barley" desc="Barley is a cereal grain primarily grown for animal fodder, beer production, and health foods." scientificName="Hordeum vulgare" season="Spring or fall" waterRequirement="18-24 inches of water during the growing season" soilType="Well-drained, fertile soil with a pH of 6.0 to 7.5" harvestTime="Late summer (60-70 days after planting for spring barley)" fertilization="Barley needs adequate nitrogen and phosphorus." pestControl="Common pests include aphids and barley yellow dwarf virus; integrated pest management is recommended." market="Barley is important for malting, brewing, and feed production." />} />
+
+                <Route path='/crops/sugarcane' element={<Crop img={sugarcane} name="Sugarcane" desc="Sugarcane is a tropical grass species used for sugar production and biofuels." scientificName="Saccharum officinarum" season="Spring (March-April)" waterRequirement="1.5-2 inches of water per week" soilType="Loamy soil with good drainage and high organic content" harvestTime="10-24 months after planting" fertilization="Sugarcane requires potassium, nitrogen, and phosphorus-based fertilizers." pestControl="Sugarcane is susceptible to borers, so regular monitoring is necessary." market="Sugarcane is important for sugar production and biofuels." />} />
+
+                <Route path='/crops/potatoes' element={<Crop img={potatoes}name="Potatoes" desc="Potatoes are tubers widely grown for food." scientificName="Solanum tuberosum" season="Spring (April)" waterRequirement="1-2 inches of water per week" soilType="Well-drained, sandy or loamy soil" harvestTime="90-120 days after planting" fertilization="Potatoes need nitrogen-rich fertilizers." pestControl="Potato beetles and blight are common threats; pest control is crucial." market="Potatoes are a staple crop used for food worldwide." />} />
+
+                <Route path='/crops/cassava' element={<Crop img={cassava} name="Cassava" desc="Cassava is a starchy tuber grown in tropical regions, used for food and industrial purposes." scientificName="Manihot esculenta" season="Tropical regions, year-round" waterRequirement="1-1.5 inches of water per week" soilType="Well-drained, sandy loam soil" harvestTime="8-12 months after planting" fertilization="Cassava requires phosphorus and potassium." pestControl="Cassava can be affected by pests such as mealybugs and mites." market="Cassava is a major source of carbohydrates in tropical regions." />} />
+
+                <Route path='/crops/tomatoes' element={<Crop img={tomatoes} name="Tomatoes" desc="Tomatoes are a popular fruit used in many cuisines worldwide." scientificName="Solanum lycopersicum" season="Late spring to early summer" waterRequirement="1-1.5 inches of water per week" soilType="Well-drained, loamy soil" harvestTime="60-85 days after planting" fertilization="Tomatoes need high levels of phosphorus and potassium." pestControl="Common pests include tomato hornworms and aphids." market="Tomatoes are widely used in cooking and are a staple in many diets." />} />
+
+                <Route path='/crops/bananas' element={<Crop img={bananas} name="Bananas" desc="Bananas are a tropical fruit rich in potassium, grown widely in tropical regions." scientificName="Musa spp." season="Year-round in tropical regions" waterRequirement="1-2 inches of water per week" soilType="Well-drained, loamy soil" harvestTime="9-12 months after planting" fertilization="Bananas require high amounts of potassium and nitrogen." pestControl="Common pests include nematodes and banana weevils." market="Bananas are one of the most widely consumed fruits worldwide." />} />
+
+                <Route path='/crops/cotton' element={<Crop img={cotton}name="Cotton" desc="Cotton is a fiber crop used for making textiles." scientificName="Gossypium spp." season="Spring (April-May)" waterRequirement="1-2 inches of water per week" soilType="Well-drained, fertile loamy soil" harvestTime="Late summer to early fall" fertilization="Cotton requires high nitrogen and phosphorus." pestControl="Common pests include bollworms and aphids." market="Cotton is important for textile production and oil." />} />
+
+                <Route path='/crops/coffee' element={<Crop img={coffee}name="Coffee" desc="Coffee is a tropical crop grown for its beans, which are used to make coffee." scientificName="Coffea spp." season="Tropical regions, year-round" waterRequirement="1-1.5 inches of water per week" soilType="Well-drained, loamy soil" harvestTime="8-12 months after flowering" fertilization="Coffee requires nitrogen, phosphorus, and potassium." pestControl="Common pests include coffee borer beetles and aphids." market="Coffee is one of the most widely traded commodities in the world." />} />
+
+                <Route path='/crops/cocoa' element={<Crop img={cocoa} name="Cocoa" desc="Cocoa is grown for its beans, which are used to produce chocolate." scientificName="Theobroma cacao" season="Tropical regions, year-round" waterRequirement="1-2 inches of water per week" soilType="Well-drained, loamy soil" harvestTime="5-6 months after flowering" fertilization="Cocoa requires nitrogen, phosphorus, and potassium." pestControl="Common pests include cocoa pod borers and aphids." market="Cocoa is widely used in the production of chocolate and cocoa-based products." />} />
+
+                <Route path='/crops/oranges' element={<Crop img={oranges} name="Oranges" desc="Oranges are a citrus fruit widely grown in subtropical and tropical regions." scientificName="Citrus sinensis" season="Late fall to early spring" waterRequirement="1-1.5 inches of water per week" soilType="Well-drained, loamy soil" harvestTime="6-8 months after flowering" fertilization="Oranges require nitrogen and potassium." pestControl="Common pests include citrus leaf miners and aphids." market="Oranges are widely consumed and used for juice and other products." />} />
+
+                <Route path='/crops/grapes' element={<Crop img={grapes} name="Grapes" desc="Grapes are a fruit crop used in winemaking and eaten fresh as table grapes." scientificName="Vitis vinifera" season="Spring to summer" waterRequirement="0.5-1 inch of water per week" soilType="Well-drained, fertile soil" harvestTime="Late summer to early fall (60-85 days after planting)" fertilization="Grapes require moderate fertilization with nitrogen and potassium." pestControl="Common pests include grapevine moths and aphids." market="Grapes are widely used for fresh eating, raisins, and winemaking." />} />
+
+                <Route path='/crops/onions' element={<Crop img={onions} name="Onions" desc="Onions are a popular vegetable grown for their edible bulbs." scientificName="Allium cepa" season="Early spring to summer" waterRequirement="1-1.5 inches of water per week" soilType="Well-drained, sandy loam" harvestTime="90-120 days after planting" fertilization="Onions require phosphorus and potassium-rich fertilizers." pestControl="Common pests include onion maggots and thrips." market="Onions are widely used in cooking and are a staple ingredient in many dishes." />} />
+
+                <Route path='/crops/peanuts' element={<Crop img={peanuts} name="Peanuts" desc="Peanuts are a legume crop grown for their edible seeds." scientificName="Arachis hypogaea" season="Late spring to early summer" waterRequirement="1-1.5 inches of water per week" soilType="Well-drained, sandy soil" harvestTime="120-150 days after planting" fertilization="Peanuts require calcium and phosphorus-rich fertilizers." pestControl="Common pests include aphids and root-knot nematodes." market="Peanuts are widely used for snacks, oil production, and animal feed." />} />
+
+                <Route path='/crops/oats' element={<Crop img={oats} name="Oats" desc="Oats are a cereal grain grown primarily for their seeds." scientificName="Avena sativa" season="Spring or fall" waterRequirement="1 inch of water per week" soilType="Well-drained, loamy soil" harvestTime="Late summer (70-120 days after planting)" fertilization="Oats require nitrogen and phosphorus-rich fertilizers." pestControl="Common pests include aphids and armyworms." market="Oats are widely used for human consumption, animal feed, and as a cover crop." />} />
+
+                <Route path='/crops/lettuce' element={<Crop img={lettuce}  name="Lettuce" desc="Lettuce is a leafy green vegetable often used in salads." scientificName="Lactuca sativa" season="Spring or fall" waterRequirement="1 inch of water per week" soilType="Well-drained, loamy soil" harvestTime="45-75 days after planting" fertilization="Lettuce requires moderate nitrogen and potassium fertilizers." pestControl="Common pests include aphids and slugs." market="Lettuce is widely consumed fresh and is a staple in salads and sandwiches." />} />
+
+                <Route path='/crops/sorghum' element={<Crop img={sorghum}  name="Sorghum" desc="Sorghum is a cereal grain used for food, animal feed, and biofuels." scientificName="Sorghum bicolor" season="Spring (April-May)" waterRequirement="0.75-1 inch of water per week" soilType="Well-drained, loamy soil" harvestTime="90-120 days after planting" fertilization="Sorghum requires nitrogen, phosphorus, and potassium." pestControl="Common pests include sorghum midge and aphids." market="Sorghum is widely used for food, animal feed, and biofuel production." />} />
+
+                <Route path='/crops/sunflowers' element={<Crop img={sunflowers} name="Sunflowers" desc="Sunflowers are grown for their seeds and oil." scientificName="Helianthus annuus" season="Spring (April-May)" waterRequirement="1 inch of water per week" soilType="Well-drained, loamy soil" harvestTime="70-100 days after planting" fertilization="Sunflowers require moderate nitrogen and potassium." pestControl="Common pests include aphids and sunflower moths." market="Sunflower seeds are widely consumed as snacks, and sunflower oil is used for cooking." />} />
+
+                <Route path='/crops/carrots' element={<Crop img={carrots} name="Carrots" desc="Carrots are a root vegetable grown for their edible taproots." scientificName="Daucus carota" season="Spring or fall" waterRequirement="1 inch of water per week" soilType="Well-drained, sandy loam" harvestTime="60-80 days after planting" fertilization="Carrots require phosphorus-rich fertilizers." pestControl="Common pests include carrot flies and aphids." market="Carrots are widely used for fresh eating, cooking, and juicing." />} />
+
+                <Route path='/crops/avocados' element={<Crop img={avocados}name="Avocados" desc="Avocados are a fruit crop grown for their creamy, edible flesh." scientificName="Persea americana" season="Spring to summer" waterRequirement="1-2 inches of water per week" soilType="Well-drained, loamy soil" harvestTime="12-18 months after planting" fertilization="Avocados require nitrogen, potassium, and magnesium." pestControl="Common pests include avocado thrips and root rot." market="Avocados are widely used for fresh eating, guacamole, and as a spread." />} />
+
+                <Route path='/crops/chilies' element={<Crop img={chilies} name="Chilies" desc="Chilies are a fruit of the Capsicum plant used for spice and flavoring." scientificName="Capsicum spp." season="Late spring to early summer" waterRequirement="1 inch of water per week" soilType="Well-drained, loamy soil" harvestTime="60-100 days after planting" fertilization="Chilies require moderate nitrogen and potassium." pestControl="Common pests include aphids and spider mites." market="Chilies are widely used in cooking, especially in spicy dishes." />} />
+
+                <Route path='/crops/pumpkins' element={<Crop img={pumpkins} name="Pumpkins" desc="Pumpkins are a type of winter squash grown for their large, edible fruit." scientificName="Cucurbita pepo" season="Spring (April-May)" waterRequirement="1-1.5 inches of water per week" soilType="Well-drained, loamy soil" harvestTime="90-120 days after planting" fertilization="Pumpkins require nitrogen and potassium-rich fertilizers." pestControl="Common pests include squash bugs and aphids." market="Pumpkins are widely used for cooking, decoration, and animal feed." />} />
+
+                <Route path='/crops/garlic' element={<Crop img={garlic} name="Garlic" desc="Garlic is a bulbous plant used as a seasoning and in medicine." scientificName="Allium sativum" season="Fall or early spring" waterRequirement="1 inch of water per week" soilType="Well-drained, loamy soil" harvestTime="90-150 days after planting" fertilization="Garlic requires moderate nitrogen and potassium fertilizers." pestControl="Common pests include garlic thrips and bulb mites." market="Garlic is widely used for seasoning, cooking, and medicinal purposes." />} />
+
+                <Route path='/crops/radishes' element={<Crop img={radishes} name="Radishes" desc="Radishes are a root vegetable grown for their edible taproots." scientificName="Raphanus sativus" season="Spring or fall" waterRequirement="1 inch of water per week" soilType="Well-drained, sandy loam" harvestTime="30-50 days after planting" fertilization="Radishes require moderate nitrogen and potassium." pestControl="Common pests include root maggots and aphids." market="Radishes are widely used in salads and as garnishes." />} />
+
+                <Route path='/crops/pineapples' element={<Crop img={pineapples} name="Pineapples" desc="Pineapples are a tropical fruit grown for their sweet, edible flesh." scientificName="Ananas comosus" season="Year-round in tropical regions" waterRequirement="1-1.5 inches of water per week" soilType="Well-drained, sandy loam" harvestTime="18-24 months after planting" fertilization="Pineapples require moderate nitrogen and potassium." pestControl="Common pests include mealybugs and pineapple weevils." market="Pineapples are widely used in cooking, fresh eating, and juicing." />} />
+
+                <Route path='/crops/zucchini' element={<Crop img={zucchini} name="Zucchini" desc="Zucchini is a type of summer squash grown for its tender, edible fruit." scientificName="Cucurbita pepo" season="Late spring to early summer" waterRequirement="1 inch of water per week" soilType="Well-drained, loamy soil" harvestTime="45-60 days after planting" fertilization="Zucchini requires moderate nitrogen and potassium fertilizers." pestControl="Common pests include squash bugs and aphids." market="Zucchini is widely used in cooking, especially in stir-fries and salads." />} />
+
+                <Route path='/crops/squash' element={<Crop img={squash}name="Squash" desc="Squash is a type of fruit vegetable that includes both summer and winter varieties." scientificName="Cucurbita spp." season="Spring (April-May)" waterRequirement="1-1.5 inches of water per week" soilType="Well-drained, loamy soil" harvestTime="60-90 days after planting" fertilization="Squash requires moderate nitrogen and potassium." pestControl="Common pests include squash bugs and aphids." market="Squash is widely used for cooking, especially in soups, casseroles, and roasted dishes." />} />
+
+                <Route path='/crops/apples' element={<Crop img={apples}name="Apples" desc="Apples are a fruit crop grown for their edible, sweet fruit." scientificName="Malus domestica" season="Spring to fall" waterRequirement="1-1.5 inches of water per week" soilType="Well-drained, loamy soil" harvestTime="90-150 days after planting" fertilization="Apples require nitrogen and potassium fertilizers." pestControl="Common pests include apple maggots and aphids." market="Apples are widely consumed fresh, cooked, and juiced." />} />
+
+                <Route path='/crops/pears' element={<Crop img={pears} name="Pears" desc="Pears are a fruit crop grown for their edible, sweet fruit." scientificName="Pyrus communis" season="Spring to fall" waterRequirement="1-1.5 inches of water per week" soilType="Well-drained, loamy soil" harvestTime="90-150 days after planting" fertilization="Pears require nitrogen and potassium fertilizers." pestControl="Common pests include pear psylla and codling moth." market="Pears are widely consumed fresh and cooked in desserts." />} />
+            </Routes>
+        </>
     );
-}
+});
 
 export default NavBar;
+

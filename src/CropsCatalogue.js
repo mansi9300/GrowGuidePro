@@ -1,6 +1,4 @@
-import TestForm from './TestForm'
-import React, { useState } from 'react'
-import CropLink from './CropLink'
+import React, { useState } from "react";
 import rice from './Images/cropIndex_1.png'
 import wheat from './Images/cropIndex_2.png'
 import corn from './Images/cropIndex_3.png'
@@ -33,19 +31,12 @@ import zucchini from './Images/cropIndex_29.png'
 import squash from './Images/cropIndex_30.png'
 import apples from './Images/cropIndex_31.png'
 import pears from './Images/cropIndex_32.png'
+import CropLink from "./CropLink"
 
-function Best4u({ scrollRef }) {
-    const [isFinished, setIsFinished] = useState(false)
-    const [bestCrops, setBestCrops] = useState([])
 
-    class CropsClass {
-        constructor(point, isdead, name, src) {
-            this.point = point
-            this.isdead = isdead
-            this.name = name
-            this.src = src
-        }
-    }
+
+function CropCatalogue() {
+    const [searchTerm, setSearchTerm] = useState('');
     const crops = [
         { name: "Rice", preferredTemperature: { min: 20, max: 30 }, rainfall: 1200, topography: 'C', budgetPer100Seeds: 10, laborPer100Seeds: 2, waterSource: 'C', fertilizer: 'A', weedControl: { min: 1, max: 5 }, src: rice },
         { name: "Wheat", preferredTemperature: { min: 15, max: 25 }, rainfall: 800, topography: 'C', budgetPer100Seeds: 8, laborPer100Seeds: 1.5, waterSource: 'C', fertilizer: 'B', weedControl: { min: 1, max: 6 }, src: wheat },
@@ -81,122 +72,30 @@ function Best4u({ scrollRef }) {
         { name: "Pears", preferredTemperature: { min: 18, max: 24 }, rainfall: 1000, topography: 'C', budgetPer100Seeds: 10, laborPer100Seeds: 2.2, waterSource: 'C', fertilizer: 'A', weedControl: { min: 1, max: 5 }, src: pears }
     ]
 
-    const cropInstances = crops.map(crop => new CropsClass(0, false, crop.name, crop.src))
 
-    const onClickHandler = (event) => {
-        event.preventDefault()
-        if (document.getElementById('testForm').checkValidity()) {
-            console.log(bestCrops)
-            getSelectedValues()
-            setIsFinished(true)
-            scrollRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' })
-        } else {
-            alert("Please Fill Up The Form Completely")
-            console.log(bestCrops)
-            setIsFinished(false)
-            scrollRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' })
-        }
-    }
 
-    const getSelectedValues = () => {
-        const form = document.getElementById('testForm')
-        const formData = new FormData(form)
-        const formEntries = Array.from(formData.entries())
-        const answersForm = formEntries.map(([key, value]) => value)
-        console.log(answersForm)
-
-        givePoint(answersForm)
-    }
-
-    const givePoint = (answersForm) => {
-        const [inputTemperature, inputRain, inputTopography, inputBudget, inputWater, inputSoil, inputWeed, inputWorkers, inputSeed] = answersForm
-
-        cropInstances.forEach((crop) => {
-            const cropConditions = crops.find(c => c.name === crop.name)
-
-            if (!cropConditions) {
-                console.error(`Could not find conditions for crop: ${crop.name}`)
-                return
-            }
-
-            const { min, max } = cropConditions.preferredTemperature
-            const preferredRain = cropConditions.rainfall
-            const preferredTopography = cropConditions.topography
-            const preferredBudget = cropConditions.budgetPer100Seeds
-            const preferredWater = cropConditions.waterSource
-            const preferredFertilizer = cropConditions.fertilizer
-            const { weedmin, weedmax } = cropConditions.weedControl
-            const preferredLabor = cropConditions.laborPer100Seeds
-
-            if (inputTemperature >= min && inputTemperature <= max && crop.isdead === false) {
-                crop.point += 7
-            } else if (inputTemperature < min || inputTemperature > max) {
-                crop.isdead = true
-                console.log(`${crop.name} died beacuse  tenmmp`)
-            }
-            if (inputRain - 100 <= preferredRain || preferredRain <= inputRain + 300) {
-                crop.point += 2
-                console.log(`${crop.name} died beacuse rain `)
-            }
-            else if (inputRain - 100 >= preferredRain || preferredRain >= inputRain + 300) {
-                crop.point -= 5
-            }
-            if ((inputTopography === "D" && preferredTopography !== "D") || (preferredTopography === "A" && inputTopography === "C")) {
-                crop.point -= 4
-                console.log(`${crop.name} died beacuse top `)
-            }
-            else if ((inputTopography === "B" || inputTopography === "C") && crop.isdead === false) {
-                crop.point += 2
-            }
-            if ((inputSeed / 100) * preferredBudget <= inputBudget && crop.isdead === false) {
-                crop.point += 5
-            }
-            else if ((inputSeed / 100) * preferredBudget > inputBudget) {
-                crop.point -= 7
-                console.log(`${crop.name} died beacuse  budget`)
-            }
-            if (preferredLabor * (inputSeed / 100) <= preferredLabor && crop.isdead === false) {
-                crop.point += 2
-            }
-            else if (preferredLabor * (inputSeed / 100) > inputWorkers) {
-                crop.point -= 3
-                console.log(`${crop.name} died beacuse  work`)
-            }
-            if ((inputWater === "D" && preferredWater !== "D") || (preferredWater === "A" && inputWater === "C")) {
-                crop.point -= 1
-                console.log(`${crop.name} died beacuse water `)
-            }
-            else if ((inputWater === "B" || inputWater === "C") && crop.isdead === false) {
-                crop.point += 2
-            }
-            if ((inputSoil === "D" && preferredFertilizer !== "D") || (preferredFertilizer === "A" && inputSoil === "C")) {
-                crop.isdead = true
-                console.log(`${crop.name} died beacuse sol `)
-            }
-            else if ((inputSoil === "B" || inputSoil === "C") && crop.isdead === false) {
-                crop.point += 4
-            }
-            if (inputWeed >= weedmin && inputWeed <= weedmax && crop.isdead === false) {
-                crop.point += 1
-            } else if (inputWeed < weedmin || inputWeed > weedmax) {
-                crop.isdead = true
-                console.log(`${crop.name} died beacuse weed`)
-            }
-        })
-        cropInstances.sort((a, b) => b.point - a.point)
-        setBestCrops(cropInstances)
-    }
-
-    const sortedListOfCrops = bestCrops.map((crop, index) => (
-        <CropLink key={index} name={crop.name} point={crop.point} isdead={crop.isdead} image={crop.src} />
+    const sortedListOfCrops = crops.map((crop, index) => (
+        <CropLink key={index} name={crop.name} image={crop.src} catalogue={true} />
     ))
-
+    const filteredCrops = crops
+        .filter(crop => crop.name.toLowerCase().includes(searchTerm.toLowerCase()))
+        .map((crop, index) => (
+            <CropLink key={index} name={crop.name} image={crop.src} catalogue={true} />
+        ));
     return (
         <>
-            {isFinished ? <div className='sortedListCrops'>{sortedListOfCrops}</div> : null}
-            <TestForm onClick={onClickHandler} />
+            <section className="search-section">
+                <input
+                    name="search"
+                    type="text"
+                    placeholder="Search crops..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="search-input"
+                />
+            </section>
+            <div id="Cropcontainer">{filteredCrops}</div>
         </>
-    )
+    );
 }
-
-export default Best4u
+export default CropCatalogue

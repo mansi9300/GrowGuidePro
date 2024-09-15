@@ -11,6 +11,7 @@ import tip8img from "./Images/tip_8.png"
 import tip9img from "./Images/tip_9.png"
 import tip10img from "./Images/tip_10.png"
 
+
 const tips = [
     <TipLink key={1} name="Composting and Organic Fertilizers" src={tip1img}></TipLink>,
     <TipLink key={2} name="Renewable Energy on Farms" src={tip2img}></TipLink>,
