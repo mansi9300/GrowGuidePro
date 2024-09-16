@@ -182,6 +182,9 @@ function Best4u({ scrollRef }) {
                 crop.isdead = true
                 console.log(`${crop.name} died beacuse weed`)
             }
+            if(crop.point <= 6){
+                crop.isdead = true
+            }
         })
         cropInstances.sort((a, b) => b.point - a.point)
         setBestCrops(cropInstances)
