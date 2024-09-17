@@ -14,7 +14,8 @@
   row-gap: 1.5vh;
   place-items: center;
 }
-#go-back-button img{
+
+#go-back-button img {
   position: fixed;
   width: 5vw;
   height: 10vh;
@@ -23,21 +24,28 @@
   border-radius: 50%;
   top: 75%;
 }
-#go-back-button img:hover{
+
+#go-back-button img:hover {
   cursor: pointer;
 }
-#go-back-buttonhover{
+
+#go-back-buttonhover {
   cursor: pointer;
 }
-#go-back-button{
+
+#go-back-button {
   position: fixed;
-  top: 750%;
   width: 5vw;
   height: 10vh;
-  background: none;
   border: none;
   border-radius: 50%;
+  background: none;
+  cursor: pointer;
+  top: 50%;
+  left: 2.5%;
+  transform: rotate(180deg);
 }
+
 #Cropcontainer {
   position: relative;
   left: 20vw;
